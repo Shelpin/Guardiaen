@@ -17,7 +17,7 @@ This bot is designed to help administrators of large Telegram groups manage and 
 
 1. **Python 3.6+**: Make sure Python is installed. Check your version with:
    ```bash
-   python --version
+   python3 --version
 
 2. **Telegram API ID and API Hash:**
 - Go to my.telegram.org and log in.
@@ -54,7 +54,7 @@ Install the necessary Python packages by running:
 - group_id = 'YOUR_GROUP_ID' (the target group ID where the bot will operate)
 - Save the file and run the bot:
 
-```python cas_management_bot.py```
+```python3 cas_management_bot.py```
 
 ### Commands
 The bot provides the following commands for managing group members:
