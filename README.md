@@ -38,7 +38,7 @@ This bot is designed to help administrators of large Telegram groups manage and 
 ### Required Libraries
 
 Install the necessary Python packages by running:
-```pip install telethon request```
+```pip3 install telethon requests```
 
 ### Preparing the CAS CSV Files 
 - Download the CAS-banned list using the CAS API (https://api.cas.chat/export.csv) and save it as cas_users.csv in the same directory as the bot script.
