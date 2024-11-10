@@ -1,6 +1,6 @@
 # Guardiæn
 
-# Telegram Group Moderation Bot with CAS Integration
+# Telegram Group spammer kicker bot with CAS Integration
 
 ## Objective
 This bot is designed to help administrators of large Telegram groups manage and remove users who have been flagged as spammers in the Combot Anti-Spam (CAS) system. The bot performs an initial cleanup by cross-referencing group members with a local CAS-banned users list and then periodically syncs with the CAS feed to keep the group free of banned users.
