@@ -1,4 +1,4 @@
-# Guardiaen
+# Guardiæn
 
 # Telegram Group Moderation Bot with CAS Integration
 
