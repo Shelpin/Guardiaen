@@ -1,4 +1,6 @@
 # Guardiæn
+![guardiaen logo with text](https://github.com/user-attachments/assets/0d82fcd9-ee5f-4a02-aa17-ae0c834193fd)
+
 
 # Telegram Group spammer kicker bot 
 
