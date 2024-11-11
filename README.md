@@ -1,15 +1,13 @@
 # Guardiæn
 
-# Telegram Group spammer kicker bot with CAS Integration
+# Telegram Group spammer kicker bot 
 
 ## Objective
-This bot is designed to help administrators of large Telegram groups manage and remove users who have been flagged as spammers in the Combot Anti-Spam (CAS) system. The bot performs an initial cleanup by cross-referencing group members with a local CAS-banned users list and then periodically syncs with the CAS feed to keep the group free of banned users.
-
+This bot is designed to help administrators of large Telegram groups manage and remove users who have been flagged as spammers in the Combot Anti-Spam (CAS) system. The bot performs an initial cleanup by cross-referencing group members with a local CAS-banned users list and then the admin can kick them out by running another command.
 ## Features
 
 - **Initial Group Member Scan**: Cross-checks group members against a local `cas_users.csv` CAS-banned list and generates a `matched_users.csv` file with any matches.
 - **One-Time Mass Kick**: Allows the admin to kick and ban all users listed in `matched_users.csv` after reviewing the list.
-- **Continuous Real-Time Sync with CAS Feed**: Periodically fetches the latest CAS feed from `https://cas.chat/feed` and automatically kicks any newly detected banned users.
 
 ## Setup Guide
 
@@ -72,8 +70,3 @@ Kicks and bans all users listed in matched_users.csv. Run this command after rev
 
 Displays a help message with an overview of available commands.
 
-### Features in Detail
-
-- Initial Scan: Use /scan_for_spammers to generate matched_users.csv, which lists group members who match the CAS-banned user IDs.
-- One-Time Mass Kick: After reviewing matched_users.csv, use /kick_listed_spammers to remove all flagged users.
-- Real-Time Sync: The bot will also continuously sync with the CAS feed, running in the background to kick any newly CAS-banned users automatically.
