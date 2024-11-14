@@ -135,4 +135,9 @@ sudo systemctl enable telegram_bot
 
 ```sudo systemctl stop telegram_bot```
 
+#### Check real time logs 
+
+```sudo journalctl -u telegram_bot -f```
+
+
 
