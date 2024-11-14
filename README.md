@@ -5,7 +5,7 @@
 # Telegram Group spammer kicker bot 
 
 ## Objective
-None of the major telegram moderation bots allow to identify spammers that ar already present in a group.
+None of the major telegram moderation bots allow to identify spammers that are already present in a group.
 
 Guardiæn is designed to help administrators of large Telegram groups manage and mute or remove users who have been flagged as spammers in the Combot Anti-Spam (CAS) system. 
 The bot performs an initial scan for spammers by cross-referencing group members with a local CAS-banned users list, and then userrs that are allowed to use the bot, can mute / unmute or kick and ban them out. 
@@ -92,9 +92,22 @@ Responds with "Pong!" to confirm bot functionality.
 
 Displays a help message with an overview of available commands.
 
+![telegram-cloud-photo-size-4-5886748451994190595-y](https://github.com/user-attachments/assets/40a62e5e-7169-4d1a-a011-d56c84ab120a)
+
+
 ### Logging and Monitoring
 
 The bot utilizes both console and file logging with rotating files for bot_activity.log, capturing all events, and interactions.
+
+![telegram-cloud-photo-size-4-5886748451994190597-y](https://github.com/user-attachments/assets/9e1da1bf-80e8-4e78-94e2-3ff7d6449555)
+
+You can also check the actions taken in the "recent actions" admin section of your telegram group.
+
+![telegram-cloud-photo-size-4-5886748451994190594-y](https://github.com/user-attachments/assets/d287c2fb-7f6e-48b9-ad25-5957c2065279)
+
+
+
+
 
 ### Running as a System Service
 
