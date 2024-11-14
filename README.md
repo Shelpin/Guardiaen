@@ -2,7 +2,7 @@
 ![guardiaen logo with text](https://github.com/user-attachments/assets/0d82fcd9-ee5f-4a02-aa17-ae0c834193fd)
 
 
-# Telegram Group spammer kicker bot 
+# Telegram Group spammer muter / kicker bot 
 
 ## Objective
 None of the major telegram moderation bots allow to identify spammers that are already present in a group.
@@ -13,7 +13,7 @@ The bot performs an initial scan for spammers by cross-referencing group members
 ## Features
 
 - **Initial Group Member Scan**: Cross-checks group members against a local `cas_users.csv` CAS-banned list and generates a `matched_users.csv` file with any matches.
-- **Mute, Unmute, and Kick** : Automate management by muting, unmuting, or kicking/banning flagged members.
+- **Mute, Unmute, and Kick-ban** : Automate management by muting, unmuting, or kicking/banning flagged members.
 - **Access Control**: Only specified Telegram users can control the bot.
 - **Detailed Logging**: Logs events to both console and a file with a rotating handler.
 - **Admin Verification**: Ensures the bot has access to necessary permissions.
@@ -25,27 +25,45 @@ The bot performs an initial scan for spammers by cross-referencing group members
 1. **Python 3.6+**: Make sure Python is installed. Check your version with:
    ```bash
    python3 --version
+   ```
+
+   If you don't have python3 installed you can install it (Ubuntu/Debian) by running:
+   
+```
+sudo apt update
+sudo apt install python3 python3-pip
+```
+
+After installing you can verify the installation with: 
+```
+python3 --version
+pip3 --version
+```
+
 
 2. **Telegram API ID and API Hash:**
 - Go to my.telegram.org and log in.
 - Navigate to "API Development Tools" and create a new application.
-- Telegram will provide an API ID and API Hash for you to use.
+- Telegram will provide an API ID and API Hash for you to use. Paste those values in the API_ID and API_HASH code placeholders.
 
 3. **Bot Token:**
 
 - In Telegram, start a chat with @BotFather.
 - Use /newbot to create a bot and follow the instructions.
-- BotFather will provide a bot token for you to use.
+- BotFather will provide a bot token for you to use. Paste that token in the BOT_TOKEN code placeholder
 
 4. **Group ID:**
 
 - Add your bot to the target group as an admin with permission to ban users.
-- You can find the group ID by inviting your bot and using commands to retrieve the group ID or by checking your group’s settings.
+- You can find the group ID by using TelegramDB Search Bot ( @tgdb_bot) and using commands to retrieve the group ID or by checking your group’s settings. Paste that token in the Group_ID code placeholder
 
 ### Required Libraries
 
 Install the necessary Python packages by running:
-```pip3 install telethon requests```
+
+```
+pip3 install telethon requests
+```
 
 ### Preparing the CAS CSV Files 
 - Download the CAS-banned list using the CAS API (https://api.cas.chat/export.csv) and save it as cas_users.csv in the same directory as the bot script.
@@ -60,6 +78,7 @@ Install the necessary Python packages by running:
 - api_hash = 'YOUR_API_HASH' (your API Hash from my.telegram.org)
 - bot_token = 'YOUR_BOT_TOKEN' (your bot token from BotFather)
 - group_id = 'YOUR_GROUP_ID' (the target group ID where the bot will operate)
+- allowed_users = 'ALLOWED_USERS' (comma separated list with the telegram ID's of users allowed to run the commands)
 - Save the file and run the bot:
 
 ```python3 cas_management_bot.py```
@@ -82,7 +101,7 @@ Unmutes users in matched_users.csv.
 
 - /kick_listed_spammers:
 
-Kicks and bans all users listed in matched_users.csv. Run this command after reviewing the list of matches.
+Kicks and bans all users listed in matched_users.csv. Run this command after reviewing the list of matches. The mute function can be reverted by the bot using unmute, but unbanning requires manual action by one of the group admins.
 
 - /ping:
 
@@ -106,51 +125,66 @@ You can also check the actions taken in the "recent actions" admin section of yo
 ![telegram-cloud-photo-size-4-5886748451994190594-y](https://github.com/user-attachments/assets/d287c2fb-7f6e-48b9-ad25-5957c2065279)
 
 
-
-
-
 ### Running as a System Service
 
 With this setup you should keep the session of the bot host machine connected for the bot to work. If you want to keep the bot running continuously:
 
 #### Create the Service File
-Create a file /etc/systemd/system/telegram_bot.service:
+
+Open a new service file using a text editor. For example:
+```
+sudo nano /etc/systemd/system/guardiaen_bot.service
+```
+
+Paste the following configuration into the file:
 
 ```
 [Unit]
-Description=Telegram Bot Service
+Description=Guardiæn Telegram Bot Service
 After=network.target
 
 [Service]
 User=root
-ExecStart=/usr/bin/python3 /path/to/cas_management_bot.py
+WorkingDirectory=/path/to/your/bot_directory
+ExecStart=/usr/bin/python3 /path/to/your/bot_directory/cas_management_bot.py
 Restart=on-failure
+RestartSec=10
+StandardOutput=append:/path/to/your/bot_directory/bot_activity.log
+StandardError=append:/path/to/your/bot_directory/bot_activity.log
 
 [Install]
 WantedBy=multi-user.target
 ```
+- **WorkingDirectory**: Replace /path/to/your/bot_directory with the actual directory where your bot script is located.
+- **ExecStart**: This command starts your bot. Ensure the path points to the Python 3 executable and your bot script.
+- **Restart**: This option will restart the bot if it fails.
+- **RestartSec**: Sets a delay of 10 seconds before restarting after a failure.
+- **StandardOutput and StandardError**: Directs both output and error logs to bot_activity.log in your bot directory.
+
+  Save and exit the editor. In nano, save changes by pressing CTRL + X, then Y, and press Enter.
+
 #### Start and Enable the Service
 
 ```sudo systemctl daemon-reload
-sudo systemctl start telegram_bot
-sudo systemctl enable telegram_bot
+sudo systemctl start guardiaen_bot
+sudo systemctl enable guardiaen_bot
 ```
 
 #### Check Bot Status
 
-```sudo systemctl status telegram_bot```
+```sudo systemctl status guardiaen_bot```
 
 #### Restart the bot
 
-```sudo systemctl restart telegram_bot```
+```sudo systemctl restart guardiaen_bot```
 
 #### Stop the bot
 
-```sudo systemctl stop telegram_bot```
+```sudo systemctl stop guardiaen_bot```
 
 #### Check real time logs 
 
-```sudo journalctl -u telegram_bot -f```
+```sudo journalctl -u guardiaen_bot -f```
 
 
 
